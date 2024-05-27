@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const PORT = 5002;
 const amqp = require("amqplib");
-const bp = require("body-parser");
 var channel, connection;
 
 connect();

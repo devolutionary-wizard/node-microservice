@@ -2,10 +2,11 @@ const express = require("express");
 const app = express();
 const PORT = 5001;
 const amqp = require("amqplib");
-const bp = require("body-parser");
 var channel, connection;
 
-app.use(bp.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }))
+
 connect();
 async function connect() {
     try {
