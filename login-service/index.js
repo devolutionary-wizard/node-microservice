@@ -1,17 +1,17 @@
-const express = require("express");
+import express, { json, urlencoded } from "express";
 const app = express();
 const PORT = 5001;
-const amqp = require("amqplib");
+import { connect as _connect } from "amqplib";
 var channel, connection;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }))
+app.use(json());
+app.use(urlencoded({ extended: false }))
 
 connect();
 async function connect() {
     try {
         const amqpServer = "amqp://localhost:5672";
-        connection = await amqp.connect(amqpServer);
+        connection = await _connect(amqpServer);
         channel = await connection.createChannel();
         await channel.assertQueue("session");
     } catch (ex) {
